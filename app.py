@@ -25,9 +25,8 @@ def init_sqlite_db():
 init_sqlite_db()
 
 @app.route('/',)
-@app.route('/rejister-record/')
-# def register():
-#     return render_template('register.html')
+def register():
+    return render_template('register.html')
 
 @app.route('/rejister-record/', methods=['POST'])
 def rejister_new_record():
@@ -82,8 +81,6 @@ def init_sqlite_db():
 
 init_sqlite_db()
 
-@app.route('/',)
-@app.route('/rejister-admin/')
 def admin():
     return render_template('admin.html')
 
@@ -167,10 +164,8 @@ def init_sqlite_db():
 
 init_sqlite_db()
 
-@app.route('/',)
-@app.route('/add-room/')
-#def enter_new_room():
-    #return render_template('rooms.html')
+def enter_new_room():
+    return render_template('rooms.html')
 
 @app.route('/add-room/', methods=['POST'])
 def add_new_room():
@@ -227,10 +222,8 @@ def init_sqlite_db():
 
 init_sqlite_db()
 
-@app.route('/',)
-@app.route('/add-new-record/')
-#def enter_new_booking():
-   # return render_template('book.html')
+def enter_new_booking():
+    return render_template('book.html')
 
 
 
@@ -348,10 +341,8 @@ def init_sqlite_db():
 
 init_sqlite_db()
 
-@app.route('/',)
-@app.route('/about/')
-#def enter_new_about():
-    #return render_template('addabout.html')
+def enter_new_about():
+    return render_template('addabout.html')
 
 @app.route('/about/', methods=['POST'])
 def add_new_about():
