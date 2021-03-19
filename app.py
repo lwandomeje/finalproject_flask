@@ -84,8 +84,8 @@ init_sqlite_db()
 def admin():
     return render_template('admin.html')
 
-@app.route('/rejister-admin/', methods=['POST'])
-def rejister_admin_record():
+@app.route('/register-admin/', methods=['POST'])
+def register_admin_record():
     try:
         post_data = request.get_json()
         name = post_data['firstname']
@@ -97,8 +97,6 @@ def rejister_admin_record():
             cur.execute("INSERT INTO admin (name, lastname, email) VALUES (?, ?, ?)", (name, lastname, email))
             con.commit()
             msg = "Record successfully added."
-
-
 
     except Exception as e:
         con.rollback()
@@ -130,7 +128,7 @@ def show_admin_records():
 @app.route('/log-in/', methods=['POST'])
 def log_in():
     log ={}
-    if request.method== "POST":
+    if request.method == "POST":
         msg = None
     try:
         post_data = request.get_json()
@@ -387,6 +385,23 @@ def show_about_records():
         con.close()
         return jsonify(records)
 
+
+@app.route('/delete-booking/<int:booking_id>', methods=["GET","POST"])
+def delete_users(booking_id):
+    msg = None
+    try:
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            cur.execute("DELETE FROM booking WHERE id=" + str(booking_id))
+            con.commit()
+            msg = "A record was deleted successfully from the database."
+
+    except Exception as e:
+        con.rollback()
+        msg = "Error occurred when deleting a student in the database: " + str(e)
+    finally:
+        con.close()
+        return jsonify(msg)
 
 ########################################################################################################################
 
